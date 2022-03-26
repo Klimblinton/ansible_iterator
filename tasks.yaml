@@ -1,6 +1,8 @@
 ---
+- hosts: all
 
-- name: "Template with_items"
-  template: 
-    src: testtemplate.j2
-    dest: /opt/testtemplate.out
+tasks:
+  - name: "Template with_items"
+    template: 
+      src: testtemplate.j2
+      dest: /opt/testtemplate.out
