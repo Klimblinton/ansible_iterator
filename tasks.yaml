@@ -12,4 +12,4 @@
       template: 
         src: testtemplate.j2
         dest: /opt/testtemplate.out
-         when: zookeeper is defined
+      when: zookeeper is defined
