@@ -1,6 +1,9 @@
 ---
 - hosts: all
 
+  vars:
+    zookeeper_nodes: []
+    
   tasks:
     - name: "Generate zookeeper servers list"
       when: zookeeper is defined
