@@ -6,7 +6,7 @@
       when: zookeeper is defined
       set_fact: 
         #zookeeper_nodes[ '{{ zookeeper_vars.cluster_id }}' ]: "{{ zookeeper_nodes[ '{{ zookeeper_vars.cluster_id }}' ] }} + [ '{{ items ] }}' ]"
-        zookeeper_nodes: {{ items }}
+        zookeeper_nodes: "{{ zookeeper_nodes }} + [ '{{ item }}' ]"
       with_items: "{{ groups['all'] }}"
 
     - name: "Template with_items"
