@@ -6,3 +6,4 @@
       template: 
         src: testtemplate.j2
         dest: /opt/testtemplate.out
+      loop: "{{ groups['all'] }}"
