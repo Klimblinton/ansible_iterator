@@ -5,7 +5,8 @@
     - name: "Generate zookeeper servers list"
       when: zookeeper is defined
       set_fact: 
-        zookeeper_nodes[ '{{ zookeeper_vars.cluster_id }}' ]: "{{ zookeeper_nodes[ '{{ zookeeper_vars.cluster_id }}' ] }} + [ '{{ items ] }}' ]"
+        #zookeeper_nodes[ '{{ zookeeper_vars.cluster_id }}' ]: "{{ zookeeper_nodes[ '{{ zookeeper_vars.cluster_id }}' ] }} + [ '{{ items ] }}' ]"
+        zookeeper_nodes: items
       with_items: "{{ groups['all'] }}"
 
     - name: "Template with_items"
