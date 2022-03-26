@@ -1,7 +1,7 @@
 ---
 - hosts: all
 
-tasks:
+- tasks:
   - name: "Template with_items"
     template: 
       src: testtemplate.j2
