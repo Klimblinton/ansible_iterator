@@ -1,3 +1,5 @@
+---
+
 - name: "Template with_items"
   template: 
     src: testtemplate.j2

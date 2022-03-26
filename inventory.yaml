@@ -10,7 +10,7 @@ all:
         cluster-name: cluster-2
         node_id: 2
       ansible_host: 127.0.0.1  
-    test-2:
+    test-3:
       zookeeper:
         cluster-name: cluster-3
         node_id: 3
