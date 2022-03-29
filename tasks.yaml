@@ -2,26 +2,31 @@
 - hosts: all
 
   vars:
-    zookeeper_nodes: {}
+    zookeeper_nodes: [] 
     
   tasks:
     - name: "Generate zookeeper servers list"
       when: zookeeper is defined
-      #set_fact: 
+      set_fact: 
         #zookeeper_nodes[ '{{ zookeeper_vars.cluster_id }}' ]: "{{ zookeeper_nodes[ '{{ zookeeper_vars.cluster_id }}' ] }} + [ '{{ items ] }}' ]"
-      zookeeper_nodes: "{{ zookeeper_nodes | combine( hostvars{item}.zookeeper ) }}"
-      debug:
-        var: hostvars[item].zookeeper
+      zookeeper_nodes: "{{ zookeeper_nodes + [ item, hostvars[item].zookeeper ] }}"
+        #zookeeper_nodes[index]: "{{ hostvars[item].zookeeper }}"
+        #zookeeper_nodes: "{{ zookeeper_nodes }}"
+        #debug:
+        #var: hostvars[item].zookeeper.node_id
+        #var: zookeeper_nodes
        
       with_items: "{{ groups['all'] }}"
+      loop_control:
+        index_var: index
 
-      #    - name: "Debug"
-      #debug:
-      #  var: zookeeper_nodes
-      #when: zookeeper is defined
-
-    - name: "Template with_items"
-      template: 
-        src: testtemplate.j2
-        dest: /opt/testtemplate.out
+    - name: "Debug"
+      debug:
+        var: zookeeper_nodes
       when: zookeeper is defined
+
+      #- name: "Template with_items"
+      #template: 
+      #src: testtemplate.j2
+      #dest: /opt/testtemplate.out
+      #when: zookeeper is defined
