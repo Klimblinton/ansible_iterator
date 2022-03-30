@@ -27,11 +27,11 @@
     - name: "Generate zookeeper servers list"
       when: zookeeper is defined
       set_fact:
-              zookeeper_nodes: "{{ zookeeper_nodes | combine ( {item:  hostvars[item]['zookeeper']  }, recursive=True)  }}"
+        zookeeper_nodes: "{{ zookeeper_nodes | combine ( {item:  hostvars[item]['zookeeper']  }, recursive=True)  }}"
         
       with_items: "{{ groups['all'] }}"
-      loop_control:
-        index_var: index
+      #loop_control:
+      #index_var: index
 
 
     - name: "Debug"
