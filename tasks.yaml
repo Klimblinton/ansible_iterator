@@ -18,7 +18,7 @@
       debug:
         #var: hostvars[item].zookeeper.node_id
         #var: zookeeper_nodes
-        var: hostvars[item]['zookeeper']
+        var:  hostvars[item]['zookeeper']
        
       with_items: "{{ groups['all'] }}"
       loop_control:
@@ -27,7 +27,7 @@
     - name: "Generate zookeeper servers list"
       when: zookeeper is defined
       set_fact:
-        zookeeper_nodes: "{{ zookeeper_nodes | combine ( {item:  hostvars[item]['zookeeper']  }, recursive=True)  }}"
+        zookeeper_nodes: "{{ zookeeper_nodes | combine ( {item:  hostvars[item]['zookeeper']  }, recursive=true)  }}"
         
       with_items: "{{ groups['all'] }}"
       #loop_control:
