@@ -2,7 +2,7 @@
 - hosts: all
 
   vars:
-    zookeeper_nodes: {}
+   #zookeeper_nodes: [] 
     
   tasks:
     - name: "Debug zookeeper servers list"
@@ -27,7 +27,8 @@
     - name: "Generate zookeeper servers list"
       when: zookeeper is defined
       set_fact:
-        zookeeper_nodes: "{{ zookeeper_nodes | combine ( {item:  hostvars[item]['zookeeper']  }, recursive=true)  }}"
+              #zookeeper_nodes: "{{ zookeeper_nodes | combine ( {item:  hostvars[item]['zookeeper']  }, recursive=true)  }}"
+       zookeeper_nodes: "{{ zookeeper_nodes | default([]) + [ hostvars[item]['zookeeper'] ]  }}"
         
       with_items: "{{ groups['all'] }}"
       #loop_control:
