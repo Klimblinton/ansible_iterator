@@ -10,8 +10,9 @@
       when:
         - zookeeper is defined 
         - item.1 == ansible_hostname
+      set_fact:
+        current_clustername: "{{ item.0['name'] }}"
       
-      current_clustername: "{{ item.0['name'] }}"
       with_subelements:
         - "{{ zookeeper.clusters }}"
         - nodes
