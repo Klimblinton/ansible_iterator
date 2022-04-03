@@ -7,21 +7,10 @@
         
   tasks:
 
-    - name: "Debug item 1"
-      when:
-        - zookeeper is defined 
-        
-      debug:
-        var: item.1
-      
-      with_subelements:
-        - "{{ zookeeper.clusters }}"
-        - nodes
-  
     - name: "Get clustername of current host"
       when:
         - zookeeper is defined 
-        - item.1 == ansible_hostname
+        - item.1 == inventory_hostname
       set_fact:
         current_clustername: "{{ item.0['name'] }}"
       
