@@ -1,19 +1,18 @@
 all:
-  hosts:
-    zookeeper_servers:
-      hosts:
-        test-1:
-          #zookeeper:
-          #cluster-name: cluster-1
-          #node_id: 1  
-          ansible_host: 127.0.0.1
-        test-2:
-          #zookeeper:
-          #cluster-name: cluster-2
-          #node_id: 2
-          ansible_host: 127.0.0.1  
-        test-3:
-          #zookeeper:
-          #cluster-name: cluster-3
-          #node_id: 3
-          ansible_host: 127.0.0.1
+  zookeeper_servers:
+    hosts:
+      test-1:
+        #zookeeper:
+        #cluster-name: cluster-1
+        #node_id: 1  
+        ansible_host: 127.0.0.1
+      test-2:
+        #zookeeper:
+        #cluster-name: cluster-2
+        #node_id: 2
+        ansible_host: 127.0.0.1  
+      test-3:
+        #zookeeper:
+        #cluster-name: cluster-3
+        #node_id: 3
+        ansible_host: 127.0.0.1
