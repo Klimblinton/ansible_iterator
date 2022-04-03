@@ -1,22 +1,24 @@
 zookeeper:
-  tst_zoo_cluster-1:
-    nodes:
-      - test-1
-      - test-2
-      - test-3
-  tst_zoo_cluster-2:
-    nodes:
-      - test-4
-      - test-5
-      - test-6
+  clusters:
+    tst_zoo_cluster-1:
+      nodes:
+        - test-1
+        - test-2
+        - test-3
+    tst_zoo_cluster-2:
+      nodes:
+        - test-4
+        - test-5
+        - test-6
 kafka:
-  tst_kfk_cluster-1:
-    nodes:
-      - test-1
-      - test-2
-      - test-3
-  tst_kfk_cluster-2:
-    nodes:
-      - test-4
-      - test-5
-      - test-6
+  clusters:
+    tst_kfk_cluster-1:
+      nodes:
+        - test-1
+        - test-2
+        - test-3
+    tst_kfk_cluster-2:
+      nodes:
+        - test-4
+        - test-5
+        - test-6

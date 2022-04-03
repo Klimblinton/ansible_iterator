@@ -7,6 +7,7 @@
   tasks:
     - name: "Debug zookeeper servers list"
       when: zookeeper is defined
+      
       #set_fact: 
         #zookeeper_nodes[ '{{ zookeeper_vars.cluster_id }}' ]: "{{ zookeeper_nodes[ '{{ zookeeper_vars.cluster_id }}' ] }} + [ '{{ items ] }}' ]"
         #zookeeper_nodes: "{{ zookeeper_nodes + [ hostvars[item]['zookeeper'] ] }}"
@@ -15,33 +16,14 @@
         #zookeeper_nodes: "{{ zookeeper_nodes +  [ hostvars[item]['zookeeper'] ] }}"
 
         #zookeeper_nodes: "{{ zookeeper_nodes }}"
+        
       debug:
+        var: item
         #var: hostvars[item].zookeeper.node_id
         #var: zookeeper_nodes
-        var:  hostvars[item]['zookeeper']
+        #var:  hostvars[item]['zookeeper']
        
-      with_items: "{{ groups['all'] }}"
-      loop_control:
-        index_var: index
+      with_subelements:
+        - "{{ zookeeper.clusters }}"
+        - nodes
 
-    - name: "Generate zookeeper servers list"
-      when: zookeeper is defined
-      set_fact:
-              #zookeeper_nodes: "{{ zookeeper_nodes | combine ( {item:  hostvars[item]['zookeeper']  }, recursive=true)  }}"
-              zookeeper_nodes: "{{ zookeeper_nodes | default([])  + [  hostvars[item]['zookeeper'] | combine ( { 'hostname': hostvars[item]['ansible_nodename'] } )  ]  }}"
-        
-      with_items: "{{ groups['all'] }}"
-      #loop_control:
-      #index_var: index
-
-
-    - name: "Debug"
-      debug:
-        var: zookeeper_nodes
-      when: zookeeper is defined
-
-      #- name: "Template with_items"
-      #template: 
-      #src: testtemplate.j2
-      #dest: /opt/testtemplate.out
-      #when: zookeeper is defined
