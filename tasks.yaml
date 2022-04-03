@@ -18,8 +18,7 @@
         - nodes
   
     - name: "Generate zookeeper cluster servers list"
-      when: 
-        - zookeeper is defined
+      when: zookeeper is defined
       
       set_fact:
         - zookeeper_nodes: "{{ zookeeper_nodes | combine(item.1) }}"
@@ -29,8 +28,7 @@
         - nodes
 
     - name: "Debug zookeeper servers list"
-      when: 
-        - zookeeper is defined 
+      when: zookeeper is defined 
 
       debug:
         var: zookeeper_nodes
