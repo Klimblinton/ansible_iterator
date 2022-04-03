@@ -3,30 +3,37 @@
 
   vars:
     zookeeper_nodes: {} 
-    
+    current_clustername: ""
+        
   tasks:
-    - name: "Debug zookeeper servers list"
-      when: zookeeper is defined 
+    - name: "Get clustername of current host"
+      when:
+        - zookeeper is defined 
+        - item.1 == ansible_hostname
       
-      #set_fact: 
-        #zookeeper_nodes[ '{{ zookeeper_vars.cluster_id }}' ]: "{{ zookeeper_nodes[ '{{ zookeeper_vars.cluster_id }}' ] }} + [ '{{ items ] }}' ]"
-        #zookeeper_nodes: "{{ zookeeper_nodes + [ hostvars[item]['zookeeper'] ] }}"
-        #zookeeper_nodes[index]: "{{ hostvars[item]['zookeeper'] }}"
-        #zookeeper_nodes: "{{ zookeeper_nodes | combine ( { hostvars[item]['zookeeper'] } )  }}"
-        #zookeeper_nodes: "{{ zookeeper_nodes +  [ hostvars[item]['zookeeper'] ] }}"
-
-        #zookeeper_nodes: "{{ zookeeper_nodes }}"
-      set_fact:
-        zookeeper_nodes: "{{ zookeeper_nodes | combine(item) }}"
-
-      debug:
-        var: item
-        #var: hostvars[item].zookeeper.node_id
-        #var: zookeeper_nodes
-        #var:  hostvars[item]['zookeeper']
-       
+      current_clustername: "{{ item.0['name'] }}"
       with_subelements:
         - "{{ zookeeper.clusters }}"
         - nodes
+  
+    - name: "Generate zookeeper cluster servers list"
+      when: 
+        - zookeeper is defined
+      
+      set_fact:
+        - zookeeper_nodes: "{{ zookeeper_nodes | combine(item.1) }}"
+    
+      with_subelements:
+        - "{{ zookeeper.clusters }}"
+        - nodes
+
+    - name: "Debug zookeeper servers list"
+      when: 
+        - zookeeper is defined 
+
+      debug:
+        var: zookeeper_nodes
+      
+       
 
     
