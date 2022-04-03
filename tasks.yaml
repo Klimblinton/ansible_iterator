@@ -6,6 +6,18 @@
     current_clustername: ""
         
   tasks:
+
+    - name: "Debug item 1"
+      when:
+        - zookeeper is defined 
+        
+      debug:
+        var: item.1
+      
+      with_subelements:
+        - "{{ zookeeper.clusters }}"
+        - nodes
+  
     - name: "Get clustername of current host"
       when:
         - zookeeper is defined 
