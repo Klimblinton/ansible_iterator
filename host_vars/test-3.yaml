@@ -1,3 +1,0 @@
-zookeeper:
-  cluster-name: cluster-3
-  node_id: 3
