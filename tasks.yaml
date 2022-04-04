@@ -33,10 +33,15 @@
 
       debug:
         var: zookeeper_nodes
-        var: hostvars
-        var: groupvars
-    
       
+    - name: "Debug hostvars"
+      debug:
+        var: hostvars
+      
+    - name: "Debug groupvars"
+      
+      debug:
+        var: groupvars  
        
 
     
