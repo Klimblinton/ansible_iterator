@@ -33,6 +33,9 @@
 
       debug:
         var: zookeeper_nodes
+        var: hostvars
+        var: groupvars
+    
       
        
 
